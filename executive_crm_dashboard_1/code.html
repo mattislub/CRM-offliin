@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Employee Scheduling Calendar</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+        }
+        .calendar-cell {
+            min-height: 120px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#111418] font-display">
+<div class="flex h-screen overflow-hidden">
+<aside class="w-20 border-r border-[#dbe0e6] bg-white dark:bg-[#1a2632] flex flex-col items-center py-4">
+<div class="bg-primary rounded-lg p-2 mb-8">
+<span class="material-symbols-outlined text-white text-2xl">corporate_fare</span>
+</div>
+<nav class="flex flex-col gap-4">
+<div class="p-2 text-[#617589] hover:text-primary cursor-pointer">
+<span class="material-symbols-outlined">dashboard</span>
+</div>
+<div class="p-2 text-[#617589] hover:text-primary cursor-pointer">
+<span class="material-symbols-outlined">apartment</span>
+</div>
+<div class="p-2 text-[#617589] hover:text-primary cursor-pointer">
+<span class="material-symbols-outlined">badge</span>
+</div>
+<div class="p-2 bg-primary/10 text-primary rounded-lg">
+<span class="material-symbols-outlined">calendar_month</span>
+</div>
+<div class="p-2 text-[#617589] hover:text-primary cursor-pointer">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<div class="p-2 text-[#617589] hover:text-primary cursor-pointer">
+<span class="material-symbols-outlined">monitoring</span>
+</div>
+</nav>
+</aside>
+<aside class="w-72 border-r border-[#dbe0e6] bg-white dark:bg-[#1a2632] flex flex-col">
+<div class="p-4 border-b border-[#f0f2f4]">
+<h2 class="text-sm font-bold text-[#111418] dark:text-white uppercase tracking-wider mb-4">Scheduling</h2>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#617589] text-lg">search</span>
+<input class="w-full bg-[#f0f2f4] dark:bg-white/5 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary" placeholder="Search employees..." type="text"/>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto">
+<div class="p-4">
+<div class="flex items-center justify-between mb-3">
+<p class="text-xs font-bold text-[#617589] uppercase">Recently Viewed</p>
+<span class="material-symbols-outlined text-sm text-[#617589]">keep</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-3 p-2 rounded-lg bg-primary/5 border border-primary/20 cursor-pointer">
+<img alt="User" class="size-8 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADtioWcOXVBBMUwY_1ELAnS5opvXZhbNhPPINYQg-rM6_Y2uZ85VF8q8vOLwzBUghJF9SR0yc8d9ZA6bJ2i-xp_Ah0t80b-h0UhyAv5mjxkzgldUPK8KFsqGh9bVO5eP71vA2isqrtlpUB-0Oatb2DZObCZfyKpdkUuAH0XZ8kcABd8WrzJKkJEpSbjX7QbFieoKDUPgSFvN9ZvCpctK3LH2DENUWO-61v8J3BqHFB3Eq1h8lQIddVHxoXmy9iFYg-47y4N8jXPcmc"/>
+<div class="flex flex-col">
+<p class="text-sm font-bold text-primary">Sarah Jenkins</p>
+<p class="text-[10px] text-[#617589]">Nurse Practitioner</p>
+</div>
+</div>
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-background-light dark:hover:bg-white/5 cursor-pointer">
+<div class="size-8 rounded-full bg-emerald-100 flex items-center justify-center font-bold text-emerald-700 text-xs">RK</div>
+<div class="flex flex-col">
+<p class="text-sm font-bold text-[#111418] dark:text-white">Robert Kimmich</p>
+<p class="text-[10px] text-[#617589]">Senior Specialist</p>
+</div>
+</div>
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-background-light dark:hover:bg-white/5 cursor-pointer">
+<div class="size-8 rounded-full bg-orange-100 flex items-center justify-center font-bold text-orange-700 text-xs">MA</div>
+<div class="flex flex-col">
+<p class="text-sm font-bold text-[#111418] dark:text-white">Maya Al-Farsi</p>
+<p class="text-[10px] text-[#617589]">Logistics Lead</p>
+</div>
+</div>
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-background-light dark:hover:bg-white/5 cursor-pointer">
+<div class="size-8 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-700 text-xs">DL</div>
+<div class="flex flex-col">
+<p class="text-sm font-bold text-[#111418] dark:text-white">David Lu</p>
+<p class="text-[10px] text-[#617589]">Developer</p>
+</div>
+</div>
+</div>
+<p class="text-xs font-bold text-[#617589] uppercase mt-6 mb-3">All Employees</p>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-background-light dark:hover:bg-white/5 cursor-pointer">
+<div class="size-8 rounded-full bg-blue-100 flex items-center justify-center font-bold text-blue-700 text-xs">AC</div>
+<p class="text-sm font-medium text-[#111418] dark:text-white">Alice Cooper</p>
+</div>
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-background-light dark:hover:bg-white/5 cursor-pointer">
+<div class="size-8 rounded-full bg-purple-100 flex items-center justify-center font-bold text-purple-700 text-xs">BM</div>
+<p class="text-sm font-medium text-[#111418] dark:text-white">Bob Marley</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col overflow-y-auto bg-background-light dark:bg-background-dark">
+<header class="h-16 flex items-center justify-between px-8 border-b border-[#dbe0e6] bg-white dark:bg-[#1a2632] sticky top-0 z-10">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-3">
+<img alt="User" class="size-10 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADtioWcOXVBBMUwY_1ELAnS5opvXZhbNhPPINYQg-rM6_Y2uZ85VF8q8vOLwzBUghJF9SR0yc8d9ZA6bJ2i-xp_Ah0t80b-h0UhyAv5mjxkzgldUPK8KFsqGh9bVO5eP71vA2isqrtlpUB-0Oatb2DZObCZfyKpdkUuAH0XZ8kcABd8WrzJKkJEpSbjX7QbFieoKDUPgSFvN9ZvCpctK3LH2DENUWO-61v8J3BqHFB3Eq1h8lQIddVHxoXmy9iFYg-47y4N8jXPcmc"/>
+<div>
+<h2 class="text-lg font-bold text-[#111418] dark:text-white leading-tight">Sarah Jenkins</h2>
+<p class="text-xs text-[#617589] font-medium">October 2023 • Global Tech</p>
+</div>
+</div>
+<div class="h-8 w-[1px] bg-[#dbe0e6] mx-2"></div>
+<div class="flex items-center gap-2">
+<button class="p-1 hover:bg-background-light rounded"><span class="material-symbols-outlined text-xl">chevron_left</span></button>
+<span class="text-sm font-bold">October 2023</span>
+<button class="p-1 hover:bg-background-light rounded"><span class="material-symbols-outlined text-xl">chevron_right</span></button>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-[#617589] px-4 py-2 rounded-lg text-sm font-bold border border-[#dbe0e6] hover:bg-white transition-colors">
+                    Draft Schedule
+                </button>
+<button class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">print</span>
+                    Print Wage Plan
+                </button>
+</div>
+</header>
+<div class="p-6">
+<div class="bg-white dark:bg-[#1a2632] rounded-xl border border-[#dbe0e6] dark:border-white/10 shadow-sm overflow-hidden">
+<div class="calendar-grid border-b border-[#f0f2f4] bg-slate-50 dark:bg-white/5">
+<div class="py-3 text-center text-[11px] font-bold text-[#617589] uppercase border-r border-[#f0f2f4]">Mon</div>
+<div class="py-3 text-center text-[11px] font-bold text-[#617589] uppercase border-r border-[#f0f2f4]">Tue</div>
+<div class="py-3 text-center text-[11px] font-bold text-[#617589] uppercase border-r border-[#f0f2f4]">Wed</div>
+<div class="py-3 text-center text-[11px] font-bold text-[#617589] uppercase border-r border-[#f0f2f4]">Thu</div>
+<div class="py-3 text-center text-[11px] font-bold text-[#617589] uppercase border-r border-[#f0f2f4]">Fri</div>
+<div class="py-3 text-center text-[11px] font-bold text-[#617589] uppercase border-r border-[#f0f2f4] text-slate-400">Sat</div>
+<div class="py-3 text-center text-[11px] font-bold text-[#617589] uppercase text-slate-400">Sun</div>
+</div>
+<div class="calendar-grid divide-y divide-[#f0f2f4]">
+<div class="calendar-cell p-2 border-r border-[#f0f2f4] bg-[#f8fafc]/50">
+<span class="text-sm font-medium text-slate-400">25</span>
+</div>
+<div class="calendar-cell p-2 border-r border-[#f0f2f4] bg-[#f8fafc]/50">
+<span class="text-sm font-medium text-slate-400">26</span>
+</div>
+<div class="calendar-cell p-2 border-r border-[#f0f2f4] bg-[#f8fafc]/50">
+<span class="text-sm font-medium text-slate-400">27</span>
+</div>
+<div class="calendar-cell p-2 border-r border-[#f0f2f4] bg-[#f8fafc]/50">
+<span class="text-sm font-medium text-slate-400">28</span>
+</div>
+<div class="calendar-cell p-2 border-r border-[#f0f2f4] bg-[#f8fafc]/50">
+<span class="text-sm font-medium text-slate-400">29</span>
+</div>
+<div class="calendar-cell p-2 border-r border-[#f0f2f4] bg-[#f8fafc]/50">
+<span class="text-sm font-medium text-slate-400">30</span>
+</div>
+<div class="calendar-cell p-2">
+<span class="text-sm font-bold text-[#111418]">1</span>
+</div>
+<div class="calendar-cell p-2 border-r border-[#f0f2f4] hover:bg-slate-50 cursor-pointer group transition-colors">
+<div class="flex justify-between items-start">
+<span class="text-sm font-bold text-[#111418]">2</span>
+<span class="material-symbols-outlined text-xs text-[#617589] opacity-0 group-hover:opacity-100">add_circle</span>
+</div>
+<div class="mt-2 space-y-1">
+<div class="px-2 py-0.5 bg-blue-50 border-l-2 border-primary text-[10px] font-bold text-primary flex justify-between">
+<span>8h Worked</span>
+<span>08:00 - 17:00</span>
+</div>
+</div>
+</div>
+<div class="calendar-cell p-2 border-r border-[#f0f2f4] hover:bg-slate-50 cursor-pointer group transition-colors">
+<div class="flex justify-between items-start">
+<span class="text-sm font-bold text-[#111418]">3</span>
+</div>
+<div class="mt-2 space-y-1">
+<div class="px-2 py-0.5 bg-blue-50 border-l-2 border-primary text-[10px] font-bold text-primary flex justify-between">
+<span>8h Worked</span>
+</div>
+<div class="px-2 py-0.5 bg-orange-50 border-l-2 border-orange-500 text-[10px] font-bold text-orange-600">
+                                2h Overtime
+                            </div>
+</div>
+</div>
+<div class="calendar-cell p-2 border-r border-[#f0f2f4] hover:bg-slate-50 cursor-pointer transition-colors">
+<span class="text-sm font-bold text-[#111418]">4</span>
+<div class="mt-2">
+<div class="px-2 py-0.5 bg-emerald-50 border-l-2 border-emerald-500 text-[10px] font-bold text-emerald-700">
+                                Sick Leave
+                            </div>
+</div>
+</div>
+<div class="calendar-cell p-2 border-r border-[#f0f2f4] hover:bg-slate-50 cursor-pointer">
+<span class="text-sm font-bold text-[#111418]">5</span>
+<div class="mt-2">
+<div class="px-2 py-0.5 bg-blue-50 border-l-2 border-primary text-[10px] font-bold text-primary">8h Worked</div>
+</div>
+</div>
+<div class="calendar-cell p-2 border-r border-[#f0f2f4] hover:bg-slate-50 cursor-pointer">
+<span class="text-sm font-bold text-[#111418]">6</span>
+<div class="mt-2 space-y-1">
+<div class="px-2 py-0.5 bg-blue-50 border-l-2 border-primary text-[10px] font-bold text-primary">8h Worked</div>
+<div class="px-2 py-0.5 bg-purple-50 border-l-2 border-purple-500 text-[10px] font-bold text-purple-600">
+                                Babysitting $45
+                            </div>
+</div>
+</div>
+<div class="calendar-cell p-2 border-r border-[#f0f2f4] bg-slate-50/50">
+<span class="text-sm font-bold text-slate-400">7</span>
+</div>
+<div class="calendar-cell p-2 bg-slate-50/50">
+<span class="text-sm font-bold text-slate-400">8</span>
+</div>
+<div class="calendar-cell p-2 border-r border-[#f0f2f4] hover:bg-slate-50 cursor-pointer">
+<span class="text-sm font-bold text-[#111418]">9</span>
+<div class="mt-2">
+<div class="px-2 py-0.5 bg-amber-50 border-l-2 border-amber-500 text-[10px] font-bold text-amber-700">
+                                Holiday
+                            </div>
+</div>
+</div>
+<div class="calendar-cell p-2 border-r border-[#f0f2f4] hover:bg-slate-50 cursor-pointer">
+<span class="text-sm font-bold text-[#111418]">10</span>
+<div class="mt-2">
+<div class="px-2 py-0.5 bg-amber-50 border-l-2 border-amber-500 text-[10px] font-bold text-amber-700">
+                                Holiday
+                            </div>
+</div>
+</div>
+<div class="calendar-cell p-2 border-r border-[#f0f2f4] hover:bg-slate-50 cursor-pointer">
+<span class="text-sm font-bold text-[#111418]">11</span>
+<div class="mt-2">
+<div class="px-2 py-0.5 bg-amber-50 border-l-2 border-amber-500 text-[10px] font-bold text-amber-700">
+                                Holiday
+                            </div>
+</div>
+</div>
+<div class="calendar-cell p-2 border-r border-[#f0f2f4] hover:bg-slate-50 cursor-pointer">
+<span class="text-sm font-bold text-[#111418]">12</span>
+</div>
+<div class="calendar-cell p-2 border-r border-[#f0f2f4] bg-blue-50/30 ring-2 ring-primary ring-inset ring-opacity-50">
+<div class="flex justify-between items-start">
+<span class="text-sm font-bold text-primary">13</span>
+<span class="text-[9px] font-bold bg-primary text-white px-1 rounded uppercase">Today</span>
+</div>
+<div class="mt-2">
+<div class="px-2 py-0.5 bg-blue-50 border-l-2 border-primary text-[10px] font-bold text-primary">8h Worked</div>
+</div>
+</div>
+<div class="calendar-cell p-2 border-r border-[#f0f2f4] bg-slate-50/50">
+<span class="text-sm font-bold text-slate-400">14</span>
+</div>
+<div class="calendar-cell p-2 bg-slate-50/50">
+<span class="text-sm font-bold text-slate-400">15</span>
+</div>
+</div>
+</div>
+<div class="mt-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
+<div class="lg:col-span-3 bg-white p-4 rounded-xl border border-[#dbe0e6] flex items-center gap-6">
+<p class="text-xs font-bold text-[#617589] uppercase">Legend:</p>
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-primary"></div>
+<span class="text-xs font-medium">Regular Hours</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-orange-500"></div>
+<span class="text-xs font-medium">Overtime</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-amber-500"></div>
+<span class="text-xs font-medium">Holiday</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-emerald-500"></div>
+<span class="text-xs font-medium">Sick Leave</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-purple-500"></div>
+<span class="text-xs font-medium">Babysitting Charges</span>
+</div>
+</div>
+<div class="bg-white p-4 rounded-xl border border-[#dbe0e6]">
+<div class="flex justify-between items-center">
+<p class="text-xs font-bold text-[#617589]">MONTHLY TOTALS</p>
+<span class="material-symbols-outlined text-sm text-[#617589]">info</span>
+</div>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="text-xl font-bold">142h</span>
+<span class="text-[10px] font-bold text-emerald-600">On Track</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<div class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center">
+<div class="bg-white rounded-xl w-full max-w-md shadow-2xl overflow-hidden">
+<div class="p-6 border-b border-[#f0f2f4] flex justify-between items-center">
+<h3 class="font-bold text-lg">Input Entry - Oct 12</h3>
+<button class="text-[#617589]"><span class="material-symbols-outlined">close</span></button>
+</div>
+<div class="p-6 space-y-4">
+<div>
+<label class="block text-xs font-bold text-[#617589] uppercase mb-1">Hours Worked</label>
+<input class="w-full border-[#dbe0e6] rounded-lg text-sm" placeholder="e.g. 8" type="number"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-[#617589] uppercase mb-1">Overtime</label>
+<input class="w-full border-[#dbe0e6] rounded-lg text-sm" placeholder="e.g. 2" type="number"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-[#617589] uppercase mb-1">Leave Type</label>
+<select class="w-full border-[#dbe0e6] rounded-lg text-sm">
+<option>None</option>
+<option>Holiday</option>
+<option>Sick Leave</option>
+<option>Unpaid Leave</option>
+</select>
+</div>
+<div>
+<label class="block text-xs font-bold text-[#617589] uppercase mb-1">Babysitting Charges ($)</label>
+<input class="w-full border-[#dbe0e6] rounded-lg text-sm" placeholder="Amount" type="number"/>
+</div>
+</div>
+<div class="p-6 bg-slate-50 border-t border-[#f0f2f4] flex gap-3">
+<button class="flex-1 bg-primary text-white font-bold py-2 rounded-lg">Save Changes</button>
+<button class="flex-1 bg-white border border-[#dbe0e6] font-bold py-2 rounded-lg">Cancel</button>
+</div>
+</div>
+</div>
+
+</body></html>
+<!-- Injection By NetFree -->
+<script src="//netfree.link/injection-script/go-payment.js" type="text/javascript" async ></script>
+<script src="//netfree.link/injection-script/popup-card-init.js" type="text/javascript" async ></script>

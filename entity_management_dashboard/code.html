@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Entity Management Dashboard</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Manrope -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#111418] min-h-screen">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col">
+<div class="p-6 flex flex-col gap-6">
+<div class="flex items-center gap-3">
+<div class="bg-primary rounded-lg p-2 text-white">
+<span class="material-symbols-outlined">corporate_fare</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-[#111418] dark:text-white text-base font-bold leading-none">CRM Admin</h1>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium">Enterprise Manager</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-primary/10 text-primary rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px] fill-1">domain</span>
+<span class="text-sm font-bold">Entities</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">badge</span>
+<span class="text-sm font-medium">Employees</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">payments</span>
+<span class="text-sm font-medium">Payroll</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">calendar_today</span>
+<span class="text-sm font-medium">Scheduling</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">description</span>
+<span class="text-sm font-medium">Reports</span>
+</a>
+</nav>
+</div>
+<div class="mt-auto p-6 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-slate-200 bg-center bg-cover bg-no-repeat" data-alt="User profile avatar circle" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAQVKih_Hw_IfJv79m1_yhu__uWSWwDVWK-75xoood8w1lBEn0x1yQmjYtakdI_diF9Egd4_1-P6YCpQ1NjgdfGLB6NBhCwE_doSeKr9a70Be6wxXF62g2vQ9qiG9ML-sQKiIsxSutE5IUnqli4rIGN10ZSy6o5LpEXEIkEUFsvVrkncbvw7pdFTbv1YYVLA5J3oq7hvN5gJmpbLd_4FNUm_geY5Wwqu6iVOIJOW6oWmmHFxH7jQbKhF6cgBbZi_M0CKBWoaNzY1Tb0')"></div>
+<div class="flex flex-col">
+<p class="text-sm font-bold text-[#111418] dark:text-white">Alex Morgan</p>
+<p class="text-xs text-slate-500">System Admin</p>
+</div>
+<button class="ml-auto text-slate-400 hover:text-slate-600 transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark">
+<!-- Top Navbar -->
+<header class="sticky top-0 z-10 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-8 py-4 flex items-center justify-between">
+<div>
+<h2 class="text-xl font-bold text-[#111418] dark:text-white">Entity Management</h2>
+<p class="text-xs text-slate-500 font-medium">Managing 24 connected business units</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">search</span>
+<input class="pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border-none rounded-lg text-sm focus:ring-2 focus:ring-primary w-64 transition-all" placeholder="Search entities..." type="text"/>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 transition-all shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                        Add New Entity
+                    </button>
+</div>
+</header>
+<div class="p-8 max-w-7xl mx-auto space-y-8">
+<!-- Summary KPI Grid -->
+<section>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Entity Card 1 -->
+<div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between mb-4">
+<div class="size-12 rounded-lg bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center text-primary overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Global Tech Solutions logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPP_6kCfGUPhivsPcjCDjjy0hLzgf6WZPa0vFOH7ro5RuUPZ6LRoozTW1hFKFx6suRxYPaY6Zf5Is_8y2_AaO19U0M4aI70BbvV33wHSVSdWhDYDSubSPgbyNKQ8LCWiP-NbdOVxvDdNGN_ZzBIHneysbmGrj5WchQd7xEZZE81rUMGyZ8b0yuoxoWfz-2oDmAABpXyXA6pNUOvolaYllbUHzaKnGBs551BMLkCWU1x-_2EmkZRuZuBhNt4zJwoTRRYByAU1H-GOsA"/>
+</div>
+<span class="bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Active</span>
+</div>
+<h3 class="font-bold text-[#111418] dark:text-white mb-1">Global Tech Solutions</h3>
+<div class="space-y-1">
+<div class="flex justify-between text-xs">
+<span class="text-slate-500">Employees</span>
+<span class="font-bold text-slate-700 dark:text-slate-300">1,240</span>
+</div>
+<div class="flex justify-between text-xs">
+<span class="text-slate-500">Monthly Payroll</span>
+<span class="font-bold text-slate-700 dark:text-slate-300">$450,000</span>
+</div>
+</div>
+</div>
+<!-- Entity Card 2 -->
+<div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between mb-4">
+<div class="size-12 rounded-lg bg-orange-50 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Northwest Logistics logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkrJL7elUcB8hDKbKb30iaSRahNUpXffH5OB0P4iPwDhoOI1N3Cub4IOLQlaNCZf3AIITatKSMzEFDsQedns3VEAqlNw6ZhRFht1f3n4c9Vm6agz77LjY-7yADqs1wzQBTfp191ZxXAZwAFDCqZDWAWO72s-QK_rzIXAD7sTJMsQqGCazM9LPLgkMUv4ysQlsbmJGy0ZqiBcBwye-neJ5ZlVPJ8e9u8kTBKu8kGETtpQgiPcUGkcnPHGKhkR7LFoBQ5g-YMCh7Nd5d"/>
+</div>
+<span class="bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Active</span>
+</div>
+<h3 class="font-bold text-[#111418] dark:text-white mb-1">Northwest Logistics</h3>
+<div class="space-y-1">
+<div class="flex justify-between text-xs">
+<span class="text-slate-500">Employees</span>
+<span class="font-bold text-slate-700 dark:text-slate-300">850</span>
+</div>
+<div class="flex justify-between text-xs">
+<span class="text-slate-500">Monthly Payroll</span>
+<span class="font-bold text-slate-700 dark:text-slate-300">$310,000</span>
+</div>
+</div>
+</div>
+<!-- Entity Card 3 -->
+<div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between mb-4">
+<div class="size-12 rounded-lg bg-purple-50 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Creative Pulse Media logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4VUxJpoOEeAFqnHE0LXFTpq4s_EfvL54S8BPmowwG8K-qq8jzNnz82SpADWarzSZjR-DlxcO4YJDom7jd04cq6NXnokbL-MdLpgKqSnWrRqteNqjCjg4xxHFBCXcwPKe05E41GJ_7KajhZ7xcCUVGl7Ek5PBIgwG9sRAI0vcKi2p0Mx3M5XuDtRfvD1Bo-QzxYp92-VLd-H9cuR385H-51wT3OPtM4MO1tjRr7k4p365zuALQAe7br-ppvdgJlrAWNBnnIZ8IDQFl"/>
+</div>
+<span class="bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Inactive</span>
+</div>
+<h3 class="font-bold text-[#111418] dark:text-white mb-1">Creative Pulse Media</h3>
+<div class="space-y-1">
+<div class="flex justify-between text-xs">
+<span class="text-slate-500">Employees</span>
+<span class="font-bold text-slate-700 dark:text-slate-300">320</span>
+</div>
+<div class="flex justify-between text-xs">
+<span class="text-slate-500">Monthly Payroll</span>
+<span class="font-bold text-slate-700 dark:text-slate-300">$125,000</span>
+</div>
+</div>
+</div>
+<!-- Entity Card 4 -->
+<div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between mb-4">
+<div class="size-12 rounded-lg bg-teal-50 dark:bg-teal-900/30 flex items-center justify-center text-teal-600 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Horizon Healthcare logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGPCR-3z2S8q6r3pcR3I_9-RBj6lLv7mtHglcJzzcmbqAMK3yi3nSn5YanhLBApxa7vXpKaw3jpAkeNo_HugjWoKLtD3wsX8kyoJTxViAdZgdb3mDI5CP43ZXCy1gX2Q4Vg8lEfFIdwLPJvMjFzKp059yiiLg7LpSUfWxaQ-gNPkz5sLbCgHyeL6PjW_k-u-62NrD3TSrOdwIefv1B0SxfkjTtF0ueFlTH6o5pzNFIdhekEGBDAURBOyHx-_J0KSL_T3XssxNvVLYH"/>
+</div>
+<span class="bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Active</span>
+</div>
+<h3 class="font-bold text-[#111418] dark:text-white mb-1">Horizon Healthcare</h3>
+<div class="space-y-1">
+<div class="flex justify-between text-xs">
+<span class="text-slate-500">Employees</span>
+<span class="font-bold text-slate-700 dark:text-slate-300">2,100</span>
+</div>
+<div class="flex justify-between text-xs">
+<span class="text-slate-500">Monthly Payroll</span>
+<span class="font-bold text-slate-700 dark:text-slate-300">$890,000</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Detailed List View -->
+<section class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
+<!-- Table Header & Filters -->
+<div class="p-6 border-b border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-4 flex-1">
+<h3 class="text-lg font-bold text-[#111418] dark:text-white">Detailed Entity List</h3>
+<div class="flex items-center gap-2">
+<select class="bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium focus:ring-primary focus:border-primary">
+<option>All Statuses</option>
+<option>Active</option>
+<option>Inactive</option>
+</select>
+<select class="bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium focus:ring-primary focus:border-primary">
+<option>All Locations</option>
+<option>Seattle, WA</option>
+<option>Austin, TX</option>
+<option>Chicago, IL</option>
+<option>New York, NY</option>
+</select>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 transition-colors">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                                More Filters
+                            </button>
+<button class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 transition-colors">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                                Export
+                            </button>
+</div>
+</div>
+<!-- Main Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
+<th class="px-6 py-3 text-xs font-bold text-slate-500 uppercase tracking-wider">Entity Name &amp; ID</th>
+<th class="px-6 py-3 text-xs font-bold text-slate-500 uppercase tracking-wider">Location</th>
+<th class="px-6 py-3 text-xs font-bold text-slate-500 uppercase tracking-wider">Tax ID</th>
+<th class="px-6 py-3 text-xs font-bold text-slate-500 uppercase tracking-wider">Last Payroll</th>
+<th class="px-6 py-3 text-xs font-bold text-slate-500 uppercase tracking-wider">Status</th>
+<th class="px-6 py-3 text-xs font-bold text-slate-500 uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded bg-primary/10 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Global Tech logo small" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUgOl4FzSbdNZAKe_HDZnEYhsu8T-e3zQ9KtAPLPhbk73YkWn9NqC5QUWjkTBJeojzPsq7cSV4WhyNgCgc-ZKVkQbCcek7cG3HVsmVbgWVLtACw_alLEiWKEry03LSYphrwpQtWfbMTddo8N7wfeKJJBc8dRnEmNqN5IhDWLNTGRKoRgBrz6TKggdQDUQsanxIdBWXc8T_3RpNYgWcmFdAhngoKfLImc4e7GxJZN_7YG0_VkY71tTpULJEQEx7046XlQM4fV-0Lhuz"/>
+</div>
+<div>
+<p class="text-sm font-bold text-[#111418] dark:text-white">Global Tech Solutions</p>
+<p class="text-[11px] text-slate-500">UID: GTS-2024-001</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm text-slate-700 dark:text-slate-300" data-location="Seattle, WA">Seattle, WA</p>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm text-slate-700 dark:text-slate-300 font-mono">XX-XXX4592</p>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm text-slate-700 dark:text-slate-300">Jun 15, 2024</p>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-bold">
+<span class="size-1.5 rounded-full bg-green-500"></span>
+                                            Active
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-primary hover:text-primary/80 font-bold text-xs">Edit</button>
+<div class="w-px h-3 bg-slate-200 dark:bg-slate-700"></div>
+<button class="text-slate-500 hover:text-slate-700 dark:hover:text-slate-300">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded bg-orange-100 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Northwest Logistics logo small" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUwEti0S5sOlF3q8B_0WTk-1VdNKuGho-19g-ZUDm8L4ZBTARNdjTVtES6knxWDg6DWZpOVmZ9ydBBnU432CvuX8SLeGqDjtZg0zg5nm2hi8FQ_wL7CDv6Eqpf4NmZn4rkbvKOfmSfSLyt3zvCgZHTXmGcHN7jxBLvcFv4j7k5IDHBQgY27pXT2pFdhhDbPTLDO06g46P82N5w4V3WJUv1XXeeQ22owFP_LCsRnBiB2g_AlbVn7rQOmKy3omjTuBPOSlH0PPdXBCCb"/>
+</div>
+<div>
+<p class="text-sm font-bold text-[#111418] dark:text-white">Northwest Logistics</p>
+<p class="text-[11px] text-slate-500">UID: NWL-2024-012</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm text-slate-700 dark:text-slate-300" data-location="Chicago, IL">Chicago, IL</p>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm text-slate-700 dark:text-slate-300 font-mono">XX-XXX8810</p>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm text-slate-700 dark:text-slate-300">Jun 12, 2024</p>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-bold">
+<span class="size-1.5 rounded-full bg-green-500"></span>
+                                            Active
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-primary hover:text-primary/80 font-bold text-xs">Edit</button>
+<div class="w-px h-3 bg-slate-200 dark:bg-slate-700"></div>
+<button class="text-slate-500 hover:text-slate-700 dark:hover:text-slate-300">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded bg-purple-100 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Creative Pulse logo small" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCykLPpibWO0cBH3EHDylpO7HANrYaLTODbyrXDD8Y33_nC52rINw3zpLgkxjpR7IYiHl99FWjy76FApbgxXF5NGW5g5DBVuDbVCtK3qaHREE8E8a0r09YzvpWC-1_X0V4tUtDpMajtXgnld5wtGChM9fKPd5_l3Y29StuJn0XE0w9wc5Q62_LD0ag975ToV789d7aWSJOCgAwxykRsygPdsKqKJTgRYu4W2ilvBwPsHOvZseMXjkAFfaTuNBtFq2_6xnKg-VITwa1c"/>
+</div>
+<div>
+<p class="text-sm font-bold text-[#111418] dark:text-white">Creative Pulse Media</p>
+<p class="text-[11px] text-slate-500">UID: CPM-2023-045</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm text-slate-700 dark:text-slate-300" data-location="Austin, TX">Austin, TX</p>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm text-slate-700 dark:text-slate-300 font-mono">XX-XXX1103</p>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm text-slate-700 dark:text-slate-300">May 30, 2024</p>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-xs font-bold">
+<span class="size-1.5 rounded-full bg-slate-400"></span>
+                                            Inactive
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-primary hover:text-primary/80 font-bold text-xs">Edit</button>
+<div class="w-px h-3 bg-slate-200 dark:bg-slate-700"></div>
+<button class="text-slate-500 hover:text-slate-700 dark:hover:text-slate-300">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded bg-teal-100 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Horizon Healthcare logo small" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyBWJ7dncgm_q9UOwbsRBbE5iFbRgUrqm5oIae66NeBq5RFMirYjp1lQEbJtYrIH2ZAHg0n-NAZB7WCp_LLZannBTkqcTgifUBvEarO5IZ-neZCNLUm7jrAuKAy_P2kTKiuhD0k7sAt1F166eUjmexKOtsgVYFcpBSlepMsfeVrJw5fy9KcSj96jm6Ov_fE5Aibwo-2b3Bojbhh6eQau96WTXpOSVxzrV-IQm8WOdmFK3RMvocUk0wqcLCm5iZetDGGWkQqoyc7FYQ"/>
+</div>
+<div>
+<p class="text-sm font-bold text-[#111418] dark:text-white">Horizon Healthcare</p>
+<p class="text-[11px] text-slate-500">UID: HHC-2024-089</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm text-slate-700 dark:text-slate-300" data-location="New York, NY">New York, NY</p>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm text-slate-700 dark:text-slate-300 font-mono">XX-XXX6642</p>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm text-slate-700 dark:text-slate-300">Jun 14, 2024</p>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-bold">
+<span class="size-1.5 rounded-full bg-green-500"></span>
+                                            Active
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-primary hover:text-primary/80 font-bold text-xs">Edit</button>
+<div class="w-px h-3 bg-slate-200 dark:bg-slate-700"></div>
+<button class="text-slate-500 hover:text-slate-700 dark:hover:text-slate-300">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="p-6 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+<p class="text-xs text-slate-500 font-medium">Showing <span class="text-slate-800 dark:text-slate-200">1 to 4</span> of 24 entities</p>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="px-3 py-1 rounded-lg bg-primary text-white text-sm font-bold">1</button>
+<button class="px-3 py-1 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 text-sm font-medium transition-colors">2</button>
+<button class="px-3 py-1 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 text-sm font-medium transition-colors">3</button>
+<button class="p-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+</body></html>
+<!-- Injection By NetFree -->
+<script src="//netfree.link/injection-script/go-payment.js" type="text/javascript" async ></script>
+<script src="//netfree.link/injection-script/popup-card-init.js" type="text/javascript" async ></script>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Executive CRM Dashboard</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#111418] font-display">
+<div class="flex h-screen overflow-hidden">
+<!-- Side Navigation Bar -->
+<aside class="w-64 border-r border-[#dbe0e6] bg-white dark:bg-[#1a2632] flex flex-col justify-between">
+<div class="p-4 flex flex-col gap-6">
+<!-- Branding -->
+<div class="flex items-center gap-3 px-2">
+<div class="bg-primary rounded-lg p-1.5 flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-2xl">corporate_fare</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-[#111418] dark:text-white text-base font-bold leading-none">Executive CRM</h1>
+<p class="text-[#617589] text-xs font-medium uppercase tracking-wider">Management</p>
+</div>
+</div>
+<!-- Nav Links -->
+<nav class="flex flex-col gap-1">
+<div class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary group cursor-pointer">
+<span class="material-symbols-outlined text-primary" data-icon="dashboard">dashboard</span>
+<p class="text-sm font-bold">Dashboard</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#617589] hover:bg-background-light dark:hover:bg-white/5 cursor-pointer transition-colors">
+<span class="material-symbols-outlined" data-icon="apartment">apartment</span>
+<p class="text-sm font-medium">Entities</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#617589] hover:bg-background-light dark:hover:bg-white/5 cursor-pointer transition-colors">
+<span class="material-symbols-outlined" data-icon="badge">badge</span>
+<p class="text-sm font-medium">Employees</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#617589] hover:bg-background-light dark:hover:bg-white/5 cursor-pointer transition-colors">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<p class="text-sm font-medium">Payroll</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#617589] hover:bg-background-light dark:hover:bg-white/5 cursor-pointer transition-colors">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+<p class="text-sm font-medium">Scheduling</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#617589] hover:bg-background-light dark:hover:bg-white/5 cursor-pointer transition-colors">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+<p class="text-sm font-medium">Reports</p>
+</div>
+</nav>
+</div>
+<!-- Profile Area -->
+<div class="p-4 border-t border-[#dbe0e6] dark:border-white/10">
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-background-light dark:hover:bg-white/5 cursor-pointer">
+<img alt="User" class="size-9 rounded-full bg-cover" data-alt="User profile picture of an executive" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADtioWcOXVBBMUwY_1ELAnS5opvXZhbNhPPINYQg-rM6_Y2uZ85VF8q8vOLwzBUghJF9SR0yc8d9ZA6bJ2i-xp_Ah0t80b-h0UhyAv5mjxkzgldUPK8KFsqGh9bVO5eP71vA2isqrtlpUB-0Oatb2DZObCZfyKpdkUuAH0XZ8kcABd8WrzJKkJEpSbjX7QbFieoKDUPgSFvN9ZvCpctK3LH2DENUWO-61v8J3BqHFB3Eq1h8lQIddVHxoXmy9iFYg-47y4N8jXPcmc"/>
+<div class="flex flex-col min-w-0">
+<p class="text-sm font-bold text-[#111418] dark:text-white truncate">Marcus Chen</p>
+<p class="text-xs text-[#617589] truncate">Chief Operations</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col overflow-y-auto bg-background-light dark:bg-background-dark">
+<!-- Header -->
+<header class="h-16 flex items-center justify-between px-8 border-b border-[#dbe0e6] bg-white dark:bg-[#1a2632] sticky top-0 z-10">
+<div class="flex items-center gap-6">
+<h2 class="text-lg font-bold text-[#111418] dark:text-white">Dashboard Overview</h2>
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#617589] text-xl">search</span>
+<input class="w-full bg-[#f0f2f4] dark:bg-white/5 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary" placeholder="Search data..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="relative p-2 text-[#617589] hover:bg-background-light rounded-lg">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white"></span>
+</button>
+<button class="p-2 text-[#617589] hover:bg-background-light rounded-lg">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span>
+                        Run Payroll
+                    </button>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="p-8 flex flex-col gap-8 max-w-7xl mx-auto w-full">
+<!-- KPI Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="bg-white dark:bg-[#1a2632] p-6 rounded-xl border border-[#dbe0e6] dark:border-white/10 shadow-sm">
+<p class="text-sm font-medium text-[#617589]">Total Employees</p>
+<div class="flex items-end justify-between mt-2">
+<h3 class="text-3xl font-bold text-[#111418] dark:text-white leading-none">1,248</h3>
+<span class="text-[#078838] bg-[#e7f5ed] text-xs font-bold px-2 py-1 rounded">+2.1%</span>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1a2632] p-6 rounded-xl border border-[#dbe0e6] dark:border-white/10 shadow-sm">
+<p class="text-sm font-medium text-[#617589]">Monthly Payroll</p>
+<div class="flex items-end justify-between mt-2">
+<h3 class="text-3xl font-bold text-[#111418] dark:text-white leading-none">$4.2M</h3>
+<span class="text-[#078838] bg-[#e7f5ed] text-xs font-bold px-2 py-1 rounded">+1.5%</span>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1a2632] p-6 rounded-xl border border-[#dbe0e6] dark:border-white/10 shadow-sm">
+<p class="text-sm font-medium text-[#617589]">Active Count</p>
+<div class="flex items-end justify-between mt-2">
+<h3 class="text-3xl font-bold text-[#111418] dark:text-white leading-none">1,180</h3>
+<span class="text-[#078838] bg-[#e7f5ed] text-xs font-bold px-2 py-1 rounded">Normal</span>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1a2632] p-6 rounded-xl border border-[#dbe0e6] dark:border-white/10 shadow-sm">
+<p class="text-sm font-medium text-[#617589]">Inactive Count</p>
+<div class="flex items-end justify-between mt-2">
+<h3 class="text-3xl font-bold text-[#111418] dark:text-white leading-none">68</h3>
+<span class="text-[#e73908] bg-[#fdf2f0] text-xs font-bold px-2 py-1 rounded">-0.2%</span>
+</div>
+</div>
+</div>
+<!-- Middle Section: Chart & Alerts -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Payroll Bar Chart Widget -->
+<div class="lg:col-span-2 bg-white dark:bg-[#1a2632] p-6 rounded-xl border border-[#dbe0e6] dark:border-white/10 shadow-sm">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h4 class="text-lg font-bold text-[#111418] dark:text-white">Payroll Costs by Entity</h4>
+<p class="text-sm text-[#617589]">Comparative monthly spend ($ USD)</p>
+</div>
+<button class="text-[#137fec] text-sm font-bold flex items-center gap-1">
+                                View Full Report <span class="material-symbols-outlined text-sm">open_in_new</span>
+</button>
+</div>
+<div class="flex flex-col gap-6">
+<!-- Visual Bar Chart representation -->
+<div class="grid grid-cols-6 gap-4 h-64 items-end px-4">
+<div class="flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary rounded-t-lg transition-all" style="height: 100%;"></div>
+<p class="text-xs font-bold text-[#617589] group-hover:text-primary">Global Tech</p>
+</div>
+<div class="flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary/60 rounded-t-lg transition-all" style="height: 45%;"></div>
+<p class="text-xs font-bold text-[#617589] group-hover:text-primary">Apex Ltd</p>
+</div>
+<div class="flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary/80 rounded-t-lg transition-all" style="height: 75%;"></div>
+<p class="text-xs font-bold text-[#617589] group-hover:text-primary">Swift Svc</p>
+</div>
+<div class="flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary rounded-t-lg transition-all" style="height: 90%;"></div>
+<p class="text-xs font-bold text-[#617589] group-hover:text-primary">Nexus Inc</p>
+</div>
+<div class="flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary/40 rounded-t-lg transition-all" style="height: 30%;"></div>
+<p class="text-xs font-bold text-[#617589] group-hover:text-primary">Delta Corp</p>
+</div>
+<div class="flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary/70 rounded-t-lg transition-all" style="height: 60%;"></div>
+<p class="text-xs font-bold text-[#617589] group-hover:text-primary">Luna LLC</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Pending Payroll List -->
+<div class="bg-white dark:bg-[#1a2632] p-6 rounded-xl border border-[#dbe0e6] dark:border-white/10 shadow-sm">
+<h4 class="text-lg font-bold text-[#111418] dark:text-white mb-6">Pending Payroll</h4>
+<div class="flex flex-col gap-4">
+<!-- Batch Item -->
+<div class="p-3 border border-[#f0f2f4] dark:border-white/5 rounded-lg flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-sm font-bold text-[#111418] dark:text-white">Batch #829 - Global Tech</p>
+<p class="text-xs text-[#617589]">428 Employees • $1.2M</p>
+</div>
+<span class="text-[10px] font-bold text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded">Urgent</span>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-primary text-white text-xs font-bold py-2 rounded-lg">Approve</button>
+<button class="px-3 border border-[#dbe0e6] text-[#617589] rounded-lg">
+<span class="material-symbols-outlined text-sm">visibility</span>
+</button>
+</div>
+</div>
+<!-- Batch Item -->
+<div class="p-3 border border-[#f0f2f4] dark:border-white/5 rounded-lg flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-sm font-bold text-[#111418] dark:text-white">Batch #830 - Nexus Inc</p>
+<p class="text-xs text-[#617589]">112 Employees • $450k</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-primary text-white text-xs font-bold py-2 rounded-lg">Approve</button>
+<button class="px-3 border border-[#dbe0e6] text-[#617589] rounded-lg">
+<span class="material-symbols-outlined text-sm">visibility</span>
+</button>
+</div>
+</div>
+<!-- View All -->
+<button class="text-sm font-bold text-[#617589] hover:text-primary mt-2">View 4 other pending batches</button>
+</div>
+</div>
+</div>
+<!-- Bottom Section: Upcoming Milestones Table -->
+<div class="bg-white dark:bg-[#1a2632] rounded-xl border border-[#dbe0e6] dark:border-white/10 shadow-sm overflow-hidden">
+<div class="p-6 border-b border-[#f0f2f4] dark:border-white/5 flex items-center justify-between">
+<h4 class="text-lg font-bold text-[#111418] dark:text-white">Upcoming Employee Milestones</h4>
+<div class="flex gap-2">
+<button class="text-xs font-bold px-3 py-1.5 rounded bg-[#f0f2f4] dark:bg-white/5 text-[#111418] dark:text-white">All Milestones</button>
+<button class="text-xs font-bold px-3 py-1.5 rounded text-[#617589]">Renewals Only</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-[#f8fafc] dark:bg-white/5">
+<tr>
+<th class="px-6 py-4 text-xs font-bold uppercase text-[#617589]">Employee</th>
+<th class="px-6 py-4 text-xs font-bold uppercase text-[#617589]">Milestone Type</th>
+<th class="px-6 py-4 text-xs font-bold uppercase text-[#617589]">Entity</th>
+<th class="px-6 py-4 text-xs font-bold uppercase text-[#617589]">Event Date</th>
+<th class="px-6 py-4 text-xs font-bold uppercase text-[#617589]">Countdown</th>
+<th class="px-6 py-4 text-xs font-bold uppercase text-[#617589]">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#f0f2f4] dark:divide-white/5">
+<tr>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-blue-100 flex items-center justify-center font-bold text-primary text-xs">SJ</div>
+<p class="text-sm font-bold text-[#111418] dark:text-white">Sarah Jenkins</p>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-blue-50 text-blue-700 text-[11px] font-bold rounded">5 Year Anniversary</span>
+</td>
+<td class="px-6 py-4 text-sm text-[#617589]">Global Tech</td>
+<td class="px-6 py-4 text-sm text-[#111418] dark:text-white font-medium">Oct 24, 2023</td>
+<td class="px-6 py-4"><span class="text-sm text-[#078838] font-bold">2 Days</span></td>
+<td class="px-6 py-4"><button class="text-primary font-bold text-xs">Send Bonus</button></td>
+</tr>
+<tr>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-emerald-100 flex items-center justify-center font-bold text-emerald-700 text-xs">RK</div>
+<p class="text-sm font-bold text-[#111418] dark:text-white">Robert Kimmich</p>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-amber-50 text-amber-700 text-[11px] font-bold rounded">Contract Renewal</span>
+</td>
+<td class="px-6 py-4 text-sm text-[#617589]">Nexus Inc</td>
+<td class="px-6 py-4 text-sm text-[#111418] dark:text-white font-medium">Oct 28, 2023</td>
+<td class="px-6 py-4"><span class="text-sm text-[#111418] dark:text-white font-bold">6 Days</span></td>
+<td class="px-6 py-4"><button class="text-primary font-bold text-xs">Review Contract</button></td>
+</tr>
+<tr>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-orange-100 flex items-center justify-center font-bold text-orange-700 text-xs">MA</div>
+<p class="text-sm font-bold text-[#111418] dark:text-white">Maya Al-Farsi</p>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-blue-50 text-blue-700 text-[11px] font-bold rounded">1 Year Anniversary</span>
+</td>
+<td class="px-6 py-4 text-sm text-[#617589]">Swift Svc</td>
+<td class="px-6 py-4 text-sm text-[#111418] dark:text-white font-medium">Nov 02, 2023</td>
+<td class="px-6 py-4"><span class="text-sm text-[#617589] font-bold">11 Days</span></td>
+<td class="px-6 py-4"><button class="text-primary font-bold text-xs">Send Reward</button></td>
+</tr>
+<tr>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-700 text-xs">DL</div>
+<p class="text-sm font-bold text-[#111418] dark:text-white">David Lu</p>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-amber-50 text-amber-700 text-[11px] font-bold rounded">Probation Review</span>
+</td>
+<td class="px-6 py-4 text-sm text-[#617589]">Apex Ltd</td>
+<td class="px-6 py-4 text-sm text-[#111418] dark:text-white font-medium">Nov 05, 2023</td>
+<td class="px-6 py-4"><span class="text-sm text-[#617589] font-bold">14 Days</span></td>
+<td class="px-6 py-4"><button class="text-primary font-bold text-xs">Start Review</button></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>
+<!-- Injection By NetFree -->
+<script src="//netfree.link/injection-script/go-payment.js" type="text/javascript" async ></script>
+<script src="//netfree.link/injection-script/popup-card-init.js" type="text/javascript" async ></script>

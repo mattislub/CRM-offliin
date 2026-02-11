@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Company-wide Holiday Calendar - CRM Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 2px;
+        }
+        .day-cell {
+            aspect-ratio: 1 / 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .day-cell:hover {
+            background-color: rgba(19, 127, 236, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#111418] font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-white dark:bg-background-dark group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Header -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#f0f2f4] dark:border-slate-800 px-10 py-3 bg-white dark:bg-background-dark">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-6">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_6_535)">
+<path clip-rule="evenodd" d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z" fill="currentColor" fill-rule="evenodd"></path>
+</g>
+<defs>
+<clippath id="clip0_6_535"><rect fill="white" height="48" width="48"></rect></clippath>
+</defs>
+</svg>
+</div>
+<h2 class="text-[#111418] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">CRM Admin</h2>
+</div>
+<nav class="flex items-center gap-9">
+<a class="text-[#111418] dark:text-slate-300 text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-[#111418] dark:text-slate-300 text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Employees</a>
+<a class="text-[#111418] dark:text-slate-300 text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Payroll</a>
+<a class="text-primary text-sm font-bold leading-normal" href="#">Scheduling</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<label class="flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-[#617589] flex border-none bg-background-light dark:bg-slate-800 items-center justify-center pl-4 rounded-l-lg" data-icon="MagnifyingGlass">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 border-none bg-background-light dark:bg-slate-800 focus:ring-0 h-full placeholder:text-[#617589] px-4 rounded-r-lg text-sm font-normal" placeholder="Search calendar..." value=""/>
+</div>
+</label>
+<div class="flex gap-2">
+<button class="flex min-w-[84px] items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal hover:bg-primary/90 transition-all shadow-sm">
+<span class="truncate">Save Changes</span>
+</button>
+<button class="flex min-w-[84px] items-center justify-center rounded-lg h-10 px-4 bg-[#f0f2f4] dark:bg-slate-800 text-[#111418] dark:text-white text-sm font-bold leading-normal hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">
+<span class="truncate">Export</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-slate-200 dark:border-slate-700" data-alt="User profile avatar circle" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBmbnqfeDvYimdE4XRkp4vIAn4NxMijZ2OCZ9mh7HqJEYq43D-GEKZPW7_jbU_eABn4omzy1AWEnmePtMtZjZRjWwvG79EVN25ALNRQxjBaKnuCN7yXE6MilBERn_Y5mZc9FEtrj9AYGUhgTPF52-7Yp7-6iSQmb2Wb9Op8ZaS_gAmQrthHtsWaTkHmuMmzZ23qzXWIAA_OOv4rCueYIqJnyOKHSCZATsJD_ORuCl05S_foqS_CJk-rEKX0y6PtszyjIRz21uI5uHdd");'></div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-80 border-r border-[#f0f2f4] dark:border-slate-800 bg-white dark:bg-background-dark p-6 overflow-y-auto">
+<div class="flex flex-col gap-8">
+<!-- Section: Filters -->
+<div class="flex flex-col gap-4">
+<div class="flex flex-col">
+<h1 class="text-[#111418] dark:text-white text-base font-bold leading-normal flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">filter_list</span>
+                                Calendar Filters
+                            </h1>
+<p class="text-[#617589] text-xs font-normal leading-normal">Manage entity specific views</p>
+</div>
+<div class="flex flex-col gap-4">
+<!-- Entities -->
+<div class="space-y-3">
+<label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Business Entities</label>
+<div class="space-y-2">
+<label class="flex items-center gap-3 p-2 rounded-lg bg-primary/5 border border-primary/20 cursor-pointer">
+<input checked="" class="rounded text-primary focus:ring-primary h-4 w-4 bg-white" type="checkbox"/>
+<span class="text-sm font-semibold text-primary">All Entities</span>
+</label>
+<label class="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition-all">
+<input class="rounded border-slate-300 dark:border-slate-600 text-primary focus:ring-primary h-4 w-4 bg-transparent" type="checkbox"/>
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300">Global Logistics Ltd.</span>
+</label>
+<label class="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition-all">
+<input class="rounded border-slate-300 dark:border-slate-600 text-primary focus:ring-primary h-4 w-4 bg-transparent" type="checkbox"/>
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300">Tech Corp North</span>
+</label>
+<label class="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition-all">
+<input class="rounded border-slate-300 dark:border-slate-600 text-primary focus:ring-primary h-4 w-4 bg-transparent" type="checkbox"/>
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300">Retail Group EU</span>
+</label>
+</div>
+</div>
+<hr class="border-slate-100 dark:border-slate-800"/>
+<!-- Legend -->
+<div class="space-y-3">
+<label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Holiday Legend</label>
+<div class="space-y-3">
+<div class="flex items-center justify-between group">
+<div class="flex items-center gap-3">
+<div class="size-3 rounded-full bg-[#137fec]"></div>
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300">Mandatory Holiday</span>
+</div>
+<span class="text-xs font-bold text-slate-400 group-hover:text-primary">12</span>
+</div>
+<div class="flex items-center justify-between group">
+<div class="flex items-center gap-3">
+<div class="size-3 rounded-full bg-[#82bcf8]"></div>
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300">Optional Holiday</span>
+</div>
+<span class="text-xs font-bold text-slate-400 group-hover:text-primary">4</span>
+</div>
+<div class="flex items-center justify-between group">
+<div class="flex items-center gap-3">
+<div class="size-3 rounded-full bg-[#1e293b] dark:bg-slate-400"></div>
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300">Company Shutdown</span>
+</div>
+<span class="text-xs font-bold text-slate-400 group-hover:text-primary">3</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Sync Card -->
+<div class="mt-auto p-4 rounded-xl bg-primary/5 border border-primary/10">
+<div class="flex items-center gap-3 mb-3">
+<span class="material-symbols-outlined text-primary">cloud_done</span>
+<span class="text-sm font-bold text-primary">Sync Calendar</span>
+</div>
+<p class="text-xs text-slate-500 mb-3 leading-relaxed">Changes are automatically synced with Payroll and Scheduling modules.</p>
+<button class="w-full py-2 text-xs font-bold bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg hover:shadow-md transition-all">Configure Sync</button>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark p-8">
+<!-- Breadcrumbs & Header -->
+<div class="flex flex-col gap-6 mb-8">
+<div class="flex items-center gap-2 text-sm">
+<span class="text-slate-400">Settings</span>
+<span class="text-slate-300">/</span>
+<span class="text-primary font-semibold">Holiday Calendar</span>
+</div>
+<div class="flex items-end justify-between gap-4">
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-4">
+<h2 class="text-4xl font-extrabold text-[#111418] dark:text-white tracking-tight">2024 Holiday Calendar</h2>
+<div class="flex items-center gap-1 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-1">
+<button class="p-1 hover:text-primary"><span class="material-symbols-outlined">chevron_left</span></button>
+<span class="px-2 text-sm font-bold">2024</span>
+<button class="p-1 hover:text-primary"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+</div>
+<p class="text-[#617589] text-base">Define public holidays and regional shutdowns across multiple business units.</p>
+</div>
+<div class="flex gap-3">
+<div class="flex h-10 items-center justify-center rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-1">
+<button class="px-4 h-full rounded-md bg-primary text-white text-xs font-bold">Year</button>
+<button class="px-4 h-full rounded-md text-slate-500 hover:text-primary text-xs font-bold">Month</button>
+<button class="px-4 h-full rounded-md text-slate-500 hover:text-primary text-xs font-bold">List</button>
+</div>
+<button class="flex items-center gap-2 px-6 bg-white dark:bg-slate-800 border border-primary/20 text-primary rounded-lg h-10 text-sm font-bold hover:shadow-lg transition-all">
+<span class="material-symbols-outlined text-lg">add</span>
+                                Add Holiday
+                            </button>
+</div>
+</div>
+</div>
+<!-- Year Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<!-- Example Month (January) -->
+<div class="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm border border-slate-100 dark:border-slate-700">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-extrabold text-slate-700 dark:text-slate-200">January</h3>
+<span class="text-[10px] font-bold text-slate-400">1 HOLIDAY</span>
+</div>
+<div class="calendar-grid mb-2">
+<div class="text-[10px] font-bold text-slate-400 text-center">M</div>
+<div class="text-[10px] font-bold text-slate-400 text-center">T</div>
+<div class="text-[10px] font-bold text-slate-400 text-center">W</div>
+<div class="text-[10px] font-bold text-slate-400 text-center">T</div>
+<div class="text-[10px] font-bold text-slate-400 text-center">F</div>
+<div class="text-[10px] font-bold text-primary text-center">S</div>
+<div class="text-[10px] font-bold text-primary text-center">S</div>
+</div>
+<div class="calendar-grid">
+<!-- Empty days -->
+<div class="day-cell text-transparent">0</div>
+<div class="day-cell text-transparent">0</div>
+<div class="day-cell text-transparent">0</div>
+<div class="day-cell text-transparent">0</div>
+<!-- Days -->
+<div class="day-cell rounded-md bg-primary text-white font-bold relative group" title="New Year's Day (Mandatory)">
+                                1
+                                <div class="absolute -top-1 -right-1 size-2 bg-white rounded-full border-2 border-primary"></div>
+</div>
+<div class="day-cell rounded-md text-slate-600 dark:text-slate-400">2</div>
+<div class="day-cell rounded-md text-slate-600 dark:text-slate-400">3</div>
+<div class="day-cell rounded-md text-slate-600 dark:text-slate-400">4</div>
+<div class="day-cell rounded-md text-slate-600 dark:text-slate-400">5</div>
+<div class="day-cell rounded-md text-slate-600 dark:text-slate-400">6</div>
+<div class="day-cell rounded-md text-slate-600 dark:text-slate-400">7</div>
+<!-- ... abbreviated for demo ... -->
+<div class="day-cell rounded-md text-slate-300 dark:text-slate-600">8</div>
+<div class="day-cell rounded-md text-slate-300 dark:text-slate-600">9</div>
+<div class="day-cell rounded-md text-slate-300 dark:text-slate-600">...</div>
+<div class="day-cell rounded-md text-slate-600 dark:text-slate-400">31</div>
+</div>
+</div>
+<!-- Example Month (March) with multiple events -->
+<div class="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm border border-slate-100 dark:border-slate-700">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-extrabold text-slate-700 dark:text-slate-200">March</h3>
+<span class="text-[10px] font-bold text-slate-400">3 HOLIDAYS</span>
+</div>
+<div class="calendar-grid mb-2">
+<div class="text-[10px] font-bold text-slate-400 text-center">M</div><div class="text-[10px] font-bold text-slate-400 text-center">T</div><div class="text-[10px] font-bold text-slate-400 text-center">W</div><div class="text-[10px] font-bold text-slate-400 text-center">T</div><div class="text-[10px] font-bold text-slate-400 text-center">F</div><div class="text-[10px] font-bold text-primary text-center">S</div><div class="text-[10px] font-bold text-primary text-center">S</div>
+</div>
+<div class="calendar-grid">
+<div class="day-cell text-transparent">0</div><div class="day-cell text-transparent">0</div><div class="day-cell text-transparent">0</div><div class="day-cell text-transparent">0</div>
+<div class="day-cell rounded-md text-slate-600 dark:text-slate-400">1</div><div class="day-cell rounded-md text-slate-600 dark:text-slate-400">2</div><div class="day-cell rounded-md text-slate-600 dark:text-slate-400">3</div>
+<div class="day-cell rounded-md text-slate-600 dark:text-slate-400">4</div><div class="day-cell rounded-md text-slate-600 dark:text-slate-400">5</div><div class="day-cell rounded-md text-slate-600 dark:text-slate-400">6</div><div class="day-cell rounded-md text-slate-600 dark:text-slate-400">7</div>
+<div class="day-cell rounded-md text-slate-600 dark:text-slate-400">8</div><div class="day-cell rounded-md text-slate-600 dark:text-slate-400">9</div><div class="day-cell rounded-md text-slate-600 dark:text-slate-400">10</div>
+<div class="day-cell rounded-md bg-primary/30 text-primary font-bold border border-primary/20">11</div>
+<div class="day-cell rounded-md text-slate-600 dark:text-slate-400">12</div><div class="day-cell rounded-md text-slate-600 dark:text-slate-400">13</div><div class="day-cell rounded-md text-slate-600 dark:text-slate-400">14</div>
+<div class="day-cell rounded-md bg-[#1e293b] text-white font-bold">15</div>
+<div class="day-cell rounded-md text-slate-600 dark:text-slate-400">16</div><div class="day-cell rounded-md text-slate-600 dark:text-slate-400">17</div><div class="day-cell rounded-md text-slate-600 dark:text-slate-400">18</div>
+<div class="day-cell rounded-md bg-primary text-white font-bold">29</div>
+<div class="day-cell rounded-md text-slate-600 dark:text-slate-400">...</div>
+</div>
+</div>
+<!-- Replicate other months ... (Generating shells for UI richness) -->
+<div class="bg-white dark:bg-slate-800/50 opacity-60 rounded-xl p-4 border border-dashed border-slate-200 dark:border-slate-700 flex flex-col items-center justify-center min-h-[240px]">
+<h3 class="font-bold text-slate-400">April</h3>
+<p class="text-[10px]">No holidays set</p>
+</div>
+<div class="bg-white dark:bg-slate-800/50 opacity-60 rounded-xl p-4 border border-dashed border-slate-200 dark:border-slate-700 flex flex-col items-center justify-center min-h-[240px]">
+<h3 class="font-bold text-slate-400">May</h3>
+<p class="text-[10px]">2 holidays set</p>
+</div>
+<div class="bg-white dark:bg-slate-800/50 opacity-60 rounded-xl p-4 border border-dashed border-slate-200 dark:border-slate-700 flex flex-col items-center justify-center min-h-[240px]">
+<h3 class="font-bold text-slate-400">June</h3>
+</div>
+<div class="bg-white dark:bg-slate-800/50 opacity-60 rounded-xl p-4 border border-dashed border-slate-200 dark:border-slate-700 flex flex-col items-center justify-center min-h-[240px]">
+<h3 class="font-bold text-slate-400">July</h3>
+</div>
+<div class="bg-white dark:bg-slate-800/50 opacity-60 rounded-xl p-4 border border-dashed border-slate-200 dark:border-slate-700 flex flex-col items-center justify-center min-h-[240px]">
+<h3 class="font-bold text-slate-400">August</h3>
+</div>
+<div class="bg-white dark:bg-slate-800/50 opacity-60 rounded-xl p-4 border border-dashed border-slate-200 dark:border-slate-700 flex flex-col items-center justify-center min-h-[240px]">
+<h3 class="font-bold text-slate-400">September</h3>
+</div>
+<div class="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm border border-slate-100 dark:border-slate-700 relative overflow-hidden group">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-extrabold text-slate-700 dark:text-slate-200">October</h3>
+<span class="text-[10px] font-bold text-slate-400">1 EVENT</span>
+</div>
+<div class="calendar-grid mb-2">
+<div class="text-[10px] font-bold text-slate-400 text-center">M</div><div class="text-[10px] font-bold text-slate-400 text-center">T</div><div class="text-[10px] font-bold text-slate-400 text-center">W</div><div class="text-[10px] font-bold text-slate-400 text-center">T</div><div class="text-[10px] font-bold text-slate-400 text-center">F</div><div class="text-[10px] font-bold text-primary text-center">S</div><div class="text-[10px] font-bold text-primary text-center">S</div>
+</div>
+<div class="calendar-grid">
+<div class="day-cell text-transparent">0</div><div class="day-cell text-transparent">0</div><div class="day-cell rounded-md text-slate-600 dark:text-slate-400">1</div><div class="day-cell rounded-md text-slate-600 dark:text-slate-400">2</div>
+<div class="day-cell rounded-md text-slate-600 dark:text-slate-400">3</div><div class="day-cell rounded-md text-slate-600 dark:text-slate-400">4</div><div class="day-cell rounded-md text-slate-600 dark:text-slate-400">5</div>
+<div class="day-cell rounded-md text-slate-600 dark:text-slate-400">6</div><div class="day-cell rounded-md text-slate-600 dark:text-slate-400">7</div><div class="day-cell rounded-md text-slate-600 dark:text-slate-400">8</div>
+<div class="day-cell rounded-md text-slate-600 dark:text-slate-400">9</div><div class="day-cell rounded-md text-slate-600 dark:text-slate-400">10</div><div class="day-cell rounded-md text-slate-600 dark:text-slate-400">11</div>
+<div class="day-cell rounded-md text-slate-600 dark:text-slate-400">12</div><div class="day-cell rounded-md text-slate-600 dark:text-slate-400">13</div><div class="day-cell rounded-md text-slate-600 dark:text-slate-400">14</div>
+<div class="day-cell rounded-md text-slate-600 dark:text-slate-400">...</div><div class="day-cell rounded-md text-slate-600 dark:text-slate-400">24</div><div class="day-cell rounded-md text-slate-600 dark:text-slate-400">25</div>
+<div class="day-cell rounded-md bg-primary text-white font-bold ring-4 ring-primary/20">31</div>
+</div>
+<!-- Tooltip interaction simulation -->
+<div class="absolute inset-0 bg-black/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+<div class="bg-white dark:bg-slate-900 shadow-xl rounded-lg p-3 text-xs border border-slate-200 dark:border-slate-700">
+<p class="font-bold text-primary mb-1">Halloween (Optional)</p>
+<p class="text-slate-500">Apply to: All Entities</p>
+<button class="mt-2 text-[10px] font-bold underline hover:text-primary">Edit Details</button>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-800/50 opacity-60 rounded-xl p-4 border border-dashed border-slate-200 dark:border-slate-700 flex flex-col items-center justify-center min-h-[240px]">
+<h3 class="font-bold text-slate-400">November</h3>
+</div>
+<div class="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm border border-slate-100 dark:border-slate-700">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-extrabold text-slate-700 dark:text-slate-200">December</h3>
+<span class="text-[10px] font-bold text-slate-400">2 HOLIDAYS</span>
+</div>
+<div class="calendar-grid mb-2">
+<div class="text-[10px] font-bold text-slate-400 text-center">M</div><div class="text-[10px] font-bold text-slate-400 text-center">T</div><div class="text-[10px] font-bold text-slate-400 text-center">W</div><div class="text-[10px] font-bold text-slate-400 text-center">T</div><div class="text-[10px] font-bold text-slate-400 text-center">F</div><div class="text-[10px] font-bold text-primary text-center">S</div><div class="text-[10px] font-bold text-primary text-center">S</div>
+</div>
+<div class="calendar-grid">
+<div class="day-cell text-transparent">0</div><div class="day-cell text-transparent">0</div><div class="day-cell text-transparent">0</div><div class="day-cell text-transparent">0</div><div class="day-cell text-transparent">0</div><div class="day-cell text-transparent">0</div>
+<div class="day-cell rounded-md text-slate-600 dark:text-slate-400">1</div><div class="day-cell rounded-md text-slate-600 dark:text-slate-400">...</div>
+<div class="day-cell rounded-md text-slate-600 dark:text-slate-400">23</div><div class="day-cell rounded-md text-slate-600 dark:text-slate-400">24</div>
+<div class="day-cell rounded-md bg-primary text-white font-bold">25</div>
+<div class="day-cell rounded-md bg-primary text-white font-bold">26</div>
+<div class="day-cell rounded-md text-slate-600 dark:text-slate-400">27</div><div class="day-cell rounded-md text-slate-600 dark:text-slate-400">28</div>
+<div class="day-cell rounded-md text-slate-600 dark:text-slate-400">29</div><div class="day-cell rounded-md text-slate-600 dark:text-slate-400">30</div><div class="day-cell rounded-md text-slate-600 dark:text-slate-400">31</div>
+</div>
+</div>
+</div>
+<!-- Floating Interaction Detail (Appears when clicked - simulated) -->
+<div class="fixed bottom-8 right-8 w-96 bg-white dark:bg-slate-900 shadow-2xl rounded-2xl border border-primary/20 p-6 z-50">
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-primary">Edit Day Status</span>
+<h4 class="text-xl font-bold dark:text-white">December 25, 2024</h4>
+</div>
+<button class="text-slate-400 hover:text-slate-600"><span class="material-symbols-outlined">close</span></button>
+</div>
+<div class="space-y-4">
+<div>
+<label class="block text-xs font-bold text-slate-400 mb-2">Holiday Type</label>
+<div class="grid grid-cols-2 gap-2">
+<button class="flex items-center gap-2 p-2 rounded-lg bg-primary text-white text-xs font-bold">
+<div class="size-2 rounded-full bg-white"></div> Mandatory
+                                </button>
+<button class="flex items-center gap-2 p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-bold hover:bg-slate-200">
+<div class="size-2 rounded-full bg-primary/40"></div> Optional
+                                </button>
+</div>
+</div>
+<div>
+<label class="block text-xs font-bold text-slate-400 mb-2">Display Name</label>
+<input class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-lg text-sm font-medium" type="text" value="Christmas Day"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-slate-400 mb-2">Applicable Entities</label>
+<select class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-lg text-sm font-medium">
+<option>All Entities</option>
+<option>Specific Only...</option>
+</select>
+</div>
+<div class="pt-2">
+<button class="w-full py-3 bg-primary text-white rounded-xl font-bold text-sm shadow-lg shadow-primary/30 hover:shadow-xl transition-all">Update Holiday</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</div>
+</body></html>
+<!-- Injection By NetFree -->
+<script src="//netfree.link/injection-script/go-payment.js" type="text/javascript" async ></script>
+<script src="//netfree.link/injection-script/popup-card-init.js" type="text/javascript" async ></script>
