@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Inactive Employee Archives | Payroll CRM</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#111418] antialiased">
+<div class="flex h-screen overflow-hidden">
+<aside class="w-64 bg-white border-r border-slate-200 flex flex-col h-full shrink-0">
+<div class="p-6 flex items-center gap-3">
+<div class="bg-primary size-10 rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-2xl">account_balance</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-[#111418] text-base font-bold leading-none">Payroll CRM</h1>
+<p class="text-slate-500 text-xs font-medium mt-1">Entity Management</p>
+</div>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 hover:bg-slate-50 rounded-lg transition-colors group" href="../executive_crm_dashboard_2/code.html">
+<span class="material-symbols-outlined text-xl group-hover:text-primary transition-colors">dashboard</span>
+<span class="text-sm font-semibold">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-primary/10 text-primary rounded-lg transition-colors" href="../payments_and_statements_hub_1/code.html">
+<span class="material-symbols-outlined text-xl">group_off</span>
+<span class="text-sm font-semibold">Archives</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 hover:bg-slate-50 rounded-lg transition-colors group" href="../payments_and_statements_hub_2/code.html">
+<span class="material-symbols-outlined text-xl group-hover:text-primary transition-colors">payments</span>
+<span class="text-sm font-semibold">Payroll</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 hover:bg-slate-50 rounded-lg transition-colors group" href="../company-wide_holiday_calendar/code.html">
+<span class="material-symbols-outlined text-xl group-hover:text-primary transition-colors">calendar_month</span>
+<span class="text-sm font-semibold">Scheduling</span>
+</a>
+<div class="pt-4 pb-2 px-3 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Administration</div>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 hover:bg-slate-50 rounded-lg transition-colors group" href="../payments_and_statements_hub_2/code.html">
+<span class="material-symbols-outlined text-xl group-hover:text-primary transition-colors">description</span>
+<span class="text-sm font-semibold">Reports</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 hover:bg-slate-50 rounded-lg transition-colors group" href="../entity_management_dashboard/code.html">
+<span class="material-symbols-outlined text-xl group-hover:text-primary transition-colors">settings</span>
+<span class="text-sm font-semibold">Settings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-100 mt-auto">
+<div class="flex items-center gap-3 p-2 bg-slate-50 rounded-xl">
+<div class="size-8 rounded-full bg-slate-200 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD4nDFkKICAjupIGtphWRkPQgKiuNX7Jlv2G_vTgwexYc8dR3NvV04TT7lYjWL1eIdiqPexNeW-8O1yNU0Sv1CMqaIh6Krdx0O-j-Nf5XnC-eoeAdzEDGo9SFz88qRM6CSdzz9ucej9sAD0rJvxukPYfZNHgSldEbDWlpvARYooaFwq_6zMkrUP2YQ4rbwywKaFPW531BzvAUZ2mcw93YSE0lg0cPcn5_RhUG3N905xNBNpAN-H22i2r5BrcJrGOkHF87CkOlrfwTF5')"></div>
+<div class="flex-1 overflow-hidden">
+<p class="text-xs font-bold text-slate-900 truncate">Alex Morgan</p>
+<p class="text-[10px] text-slate-500 truncate">Global Admin</p>
+</div>
+<button class="text-slate-400 hover:text-slate-600">
+<span class="material-symbols-outlined text-sm">logout</span>
+</button>
+</div>
+</div>
+</aside>
+<main class="flex-1 overflow-y-auto bg-background-light p-8 custom-scrollbar">
+<header class="flex justify-between items-start mb-8">
+<div>
+<h2 class="text-3xl font-black text-slate-900 tracking-tight">Inactive Employee Archives</h2>
+<p class="text-slate-500 mt-1">Access and manage records of former employees across all entities.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-lg text-sm font-bold text-slate-700 hover:bg-slate-50 shadow-sm transition-all active:scale-95">
+<span class="material-symbols-outlined text-lg">download</span>
+                    Export Archives
+                </button>
+</div>
+</header>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="p-2 bg-slate-100 text-slate-600 rounded-lg">
+<span class="material-symbols-outlined">folder_shared</span>
+</div>
+</div>
+<div>
+<p class="text-slate-500 text-sm font-semibold mb-1">Total Archived Records</p>
+<h3 class="text-2xl font-extrabold text-slate-900">1,248</h3>
+</div>
+<div class="flex items-center gap-2">
+<span class="flex items-center text-xs font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded-full">Active Retention: 7 Years</span>
+</div>
+</div>
+<div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="p-2 bg-amber-50 text-amber-600 rounded-lg">
+<span class="material-symbols-outlined">person_remove</span>
+</div>
+</div>
+<div>
+<p class="text-slate-500 text-sm font-semibold mb-1">Inactivations (MTD)</p>
+<h3 class="text-2xl font-extrabold text-slate-900">14</h3>
+</div>
+<div class="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+<div class="bg-amber-400 h-full w-1/3"></div>
+</div>
+</div>
+<div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="p-2 bg-primary/10 text-primary rounded-lg">
+<span class="material-symbols-outlined">settings_backup_restore</span>
+</div>
+</div>
+<div>
+<p class="text-slate-500 text-sm font-semibold mb-1">Reactivations (YTD)</p>
+<h3 class="text-2xl font-extrabold text-slate-900">32</h3>
+</div>
+<div class="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-1/4"></div>
+</div>
+</div>
+</div>
+<div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm mb-6">
+<div class="flex flex-wrap items-center gap-4">
+<div class="flex-1 min-w-[300px] relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:ring-primary focus:border-primary text-sm font-medium" placeholder="Search by name, ID or reason..." type="text"/>
+</div>
+<div class="flex items-center gap-3">
+<div class="relative group">
+<button class="flex items-center gap-2 px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-bold text-slate-600 hover:bg-slate-100">
+                            Entity: All Entities
+                            <span class="material-symbols-outlined text-lg">keyboard_arrow_down</span>
+</button>
+</div>
+<div class="relative group">
+<button class="flex items-center gap-2 px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-bold text-slate-600 hover:bg-slate-100">
+<span class="material-symbols-outlined text-lg">event_busy</span>
+                            Inactivation Date Range
+                            <span class="material-symbols-outlined text-lg">keyboard_arrow_down</span>
+</button>
+</div>
+<div class="h-8 w-px bg-slate-200 mx-1"></div>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">filter_alt</span>
+</button>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50/50 border-b border-slate-100">
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Name</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Entity</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Last Working Day</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Reason for Inactivation</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100">
+<tr class="hover:bg-slate-50/50 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 font-bold text-xs">JD</div>
+<div>
+<p class="text-sm font-bold text-slate-900">Johnathan Doe</p>
+<p class="text-[11px] text-slate-500 font-medium">EMP-8293</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm text-slate-600 font-semibold">Tech Corp North America</p>
+</td>
+<td class="px-6 py-4 text-sm text-slate-600 font-medium">Oct 12, 2023</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700 uppercase tracking-tight">Resigned</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary text-white rounded-lg text-[11px] font-bold hover:bg-primary/90 transition-all active:scale-95 shadow-sm">
+<span class="material-symbols-outlined text-sm">settings_backup_restore</span>
+                                    Reactivate
+                                </button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 font-bold text-xs">SM</div>
+<div>
+<p class="text-sm font-bold text-slate-900">Sarah Miller</p>
+<p class="text-[11px] text-slate-500 font-medium">EMP-4412</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm text-slate-600 font-semibold">Global Logistics Ltd</p>
+</td>
+<td class="px-6 py-4 text-sm text-slate-600 font-medium">Sep 30, 2023</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-700 uppercase tracking-tight">Contract Ended</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary text-white rounded-lg text-[11px] font-bold hover:bg-primary/90 transition-all active:scale-95 shadow-sm">
+<span class="material-symbols-outlined text-sm">settings_backup_restore</span>
+                                    Reactivate
+                                </button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 font-bold text-xs">MR</div>
+<div>
+<p class="text-sm font-bold text-slate-900">Michael Ross</p>
+<p class="text-[11px] text-slate-500 font-medium">EMP-9120</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm text-slate-600 font-semibold">Tech Corp North America</p>
+</td>
+<td class="px-6 py-4 text-sm text-slate-600 font-medium">Sep 15, 2023</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700 uppercase tracking-tight">Resigned</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary text-white rounded-lg text-[11px] font-bold hover:bg-primary/90 transition-all active:scale-95 shadow-sm">
+<span class="material-symbols-outlined text-sm">settings_backup_restore</span>
+                                    Reactivate
+                                </button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 font-bold text-xs">EB</div>
+<div>
+<p class="text-sm font-bold text-slate-900">Emily Blunt</p>
+<p class="text-[11px] text-slate-500 font-medium">EMP-7723</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm text-slate-600 font-semibold">Creative Studio LLC</p>
+</td>
+<td class="px-6 py-4 text-sm text-slate-600 font-medium">Aug 22, 2023</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-red-50 text-red-700 uppercase tracking-tight">Terminated</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary text-white rounded-lg text-[11px] font-bold hover:bg-primary/90 transition-all active:scale-95 shadow-sm">
+<span class="material-symbols-outlined text-sm">settings_backup_restore</span>
+                                    Reactivate
+                                </button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 font-bold text-xs">LG</div>
+<div>
+<p class="text-sm font-bold text-slate-900">Lucas Grey</p>
+<p class="text-[11px] text-slate-500 font-medium">EMP-3301</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm text-slate-600 font-semibold">Global Logistics Ltd</p>
+</td>
+<td class="px-6 py-4 text-sm text-slate-600 font-medium">Aug 05, 2023</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700 uppercase tracking-tight">Resigned</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary text-white rounded-lg text-[11px] font-bold hover:bg-primary/90 transition-all active:scale-95 shadow-sm">
+<span class="material-symbols-outlined text-sm">settings_backup_restore</span>
+                                    Reactivate
+                                </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
+<p class="text-xs font-semibold text-slate-500">Showing 1 to 5 of 1,248 archived employees</p>
+<div class="flex items-center gap-2">
+<button class="p-1 text-slate-400 hover:text-slate-600 disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<div class="flex items-center gap-1">
+<button class="size-7 flex items-center justify-center rounded bg-primary text-white text-[11px] font-bold">1</button>
+<button class="size-7 flex items-center justify-center rounded hover:bg-slate-200 text-slate-600 text-[11px] font-bold">2</button>
+<button class="size-7 flex items-center justify-center rounded hover:bg-slate-200 text-slate-600 text-[11px] font-bold">3</button>
+<span class="px-1 text-slate-400 text-xs">...</span>
+<button class="size-7 flex items-center justify-center rounded hover:bg-slate-200 text-slate-600 text-[11px] font-bold">250</button>
+</div>
+<button class="p-1 text-slate-400 hover:text-slate-600">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>
+<!-- Injection By NetFree -->
+<script src="//netfree.link/injection-script/go-payment.js" type="text/javascript" async ></script>
+<script src="//netfree.link/injection-script/popup-card-init.js" type="text/javascript" async ></script>
